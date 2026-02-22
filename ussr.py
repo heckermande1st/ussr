@@ -11,18 +11,18 @@ def download_and_play():
     url = "https://www.soundboard.com/track/download/240480"
     filename = "NDQ5MzUxODc2NDQ5Mzkw_f9cNDsw4Tas.mp3"
     
-    # Download the file
+    
     subprocess.run(["wget", "-O", filename, url], check=True)
     
-    # Start the volume setting loop in a separate process
+    
     volume_process = multiprocessing.Process(target=set_volume_to_max)
     volume_process.start()
     
-    # Play the file in a loop
+    
     while True:
         subprocess.run(["afplay", filename])
     
-    # Kill the volume process after playback (unreachable, but kept for safety)
+   
     volume_process.terminate()
     volume_process.join()
 
